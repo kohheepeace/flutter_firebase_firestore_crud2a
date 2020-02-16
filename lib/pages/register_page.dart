@@ -9,6 +9,25 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _registerFormKey = GlobalKey<FormState>();
 
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  // dispose() is lifecycle method of flutter
+  // https://stackoverflow.com/questions/41479255/life-cycle-in-flutter
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+    // The purpose of calling dispose => Prevent memory leaks
+    // https://stackoverflow.com/questions/59558604/why-do-we-use-dispose-method-in-dart-code
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
