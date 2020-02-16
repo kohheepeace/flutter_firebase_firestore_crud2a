@@ -98,6 +98,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   onPressed: () {
                     if (_registerFormKey.currentState.validate()) {
                       print('Validation Ok! Submit!');
+                      print('name: ${_nameController.text}');
+                      print('email: ${_emailController.text}');
+                      print('password: ${_passwordController.text}');
+                      print('confirmPassword: ${_confirmPasswordController.text}');
                     }
                   },
                 ),
