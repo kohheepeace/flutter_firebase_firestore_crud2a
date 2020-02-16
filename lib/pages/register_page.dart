@@ -41,6 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                controller: _nameController,
                 decoration: InputDecoration(labelText: 'Name', hintText: "John Jackson"),
                 validator: (value) {
                   if (value.isEmpty) {
@@ -50,6 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
               TextFormField(
+                controller: _emailController,
                 decoration: InputDecoration(labelText: 'Email', hintText: "johnjackson@example.com"),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
@@ -64,6 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
               TextFormField(
+                controller: _passwordController,
                 decoration: InputDecoration(labelText: 'Password'),
                 obscureText: true,
                 validator: (value) {
@@ -74,6 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
               TextFormField(
+                controller: _confirmPasswordController,
                 decoration: InputDecoration(labelText: 'Confirm Password'),
                 obscureText: true,
                 validator: (value) {
