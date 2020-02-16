@@ -81,9 +81,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: InputDecoration(labelText: 'Confirm Password'),
                 obscureText: true,
                 validator: (value) {
-                  // This is not correct validation. Later we will improve this validation.
-                  if (value.isEmpty) {
-                    return 'Confirm Password is not matching';
+                  // https://stackoverflow.com/questions/50155348/how-to-validate-a-form-field-based-on-the-value-of-the-other
+                  if (value != _passwordController.text) {
+                    return 'Password is not matching';
                   }
                   return null;
                 },
