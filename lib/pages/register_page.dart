@@ -22,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                decoration: InputDecoration(labelText: 'Name', hintText: "John Jackson"),
                 validator: (value) {
                   if (value.isEmpty) {
                     return "Please enter name.";
@@ -30,6 +31,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
               TextFormField(
+                decoration: InputDecoration(labelText: 'Email', hintText: "johnjackson@example.com"),
+                keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Please enter email';
@@ -42,6 +45,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
               TextFormField(
+                decoration: InputDecoration(labelText: 'Password'),
+                obscureText: true,
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Please enter password';
@@ -50,6 +55,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
               TextFormField(
+                decoration: InputDecoration(labelText: 'Confirm Password'),
+                obscureText: true,
                 validator: (value) {
                   // This is not correct validation. Later we will improve this validation.
                   if (value.isEmpty) {
