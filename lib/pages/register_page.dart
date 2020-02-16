@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/login_page.dart';
 
@@ -95,13 +96,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Text("Register"),
                   color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
-                  onPressed: () {
+                  onPressed: () async {
                     if (_registerFormKey.currentState.validate()) {
-                      print('Validation Ok! Submit!');
-                      print('name: ${_nameController.text}');
-                      print('email: ${_emailController.text}');
-                      print('password: ${_passwordController.text}');
-                      print('confirmPassword: ${_confirmPasswordController.text}');
+                      try {
+                        // Register user by firebase auth
+                        final FirebaseUser user = (await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text
+                          )).user;
+                        
+                        Navigator.pushNamed(context, '/');
+                      } catch (e) {
+                        print('Error Happened!!!: $e');
+                      }  
                     }
                   },
                 ),
