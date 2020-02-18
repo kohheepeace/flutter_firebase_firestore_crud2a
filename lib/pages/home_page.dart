@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/login_page.dart';
 
@@ -53,6 +54,14 @@ class _HomePageState extends State<HomePage> {
 								Navigator.pushNamed(context, '/sign_up');
 							}
 						),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Sign Out'),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, '/');
+              },
+            ),
           ],
         ),
       ),
