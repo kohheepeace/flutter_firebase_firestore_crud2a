@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/login_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key key, this.isAuthenticated}) : super(key: key);
+  final bool isAuthenticated;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -55,7 +56,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: Center(child: Text('This is home page')),
+      body: Center(
+        child: widget.isAuthenticated ? Text('Home Page after login') : Text('Home Page before login')
+      ),
     );
   }
 }
