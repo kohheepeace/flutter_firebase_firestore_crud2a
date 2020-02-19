@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/home_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/register_page.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,6 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isAuthenticated = false;
+  String testProviderText = "Hello Provider!";
 
   // https://stackoverflow.com/questions/41479255/life-cycle-in-flutter
   // https://flutterbyexample.com/stateful-widget-lifecycle/
@@ -33,17 +35,20 @@ class _MyAppState extends State<MyApp> {
   
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Provider<String>(
+      create: (context) => testProviderText,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: '/',
+        routes: {
+          // When navigating to the "/" route, build the FirstScreen widget.
+          '/': (context) => HomePage(isAuthenticated: isAuthenticated),
+          '/sign_up': (context) => RegisterPage(),
+        },
       ),
-      initialRoute: '/',
-      routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) => HomePage(isAuthenticated: isAuthenticated),
-        '/sign_up': (context) => RegisterPage(),
-      },
     );
   }
 }
