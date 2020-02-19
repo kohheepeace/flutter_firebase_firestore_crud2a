@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/login_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/my_posts_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/register_page.dart';
+import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatelessWidget {
   HomeDrawer({Key key, this.isAuthenticated}) : super(key: key);
@@ -19,7 +20,7 @@ class HomeDrawer extends StatelessWidget {
               color: Colors.blue,
             ),
             child: Text(
-              'Drawer Header',
+              '${Provider.of<String>(context)}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
