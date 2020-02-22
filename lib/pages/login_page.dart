@@ -1,6 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_firestore_crud2a/global_state.dart';
+import 'package:provider/provider.dart';
 
 import 'register_page.dart';
 
@@ -70,6 +72,9 @@ class _LoginPageState extends State<LoginPage> {
                           email: _emailController.text,
                           password: _passwordController.text,
                         )).user;
+
+                        Provider.of<GlobalState>(context, listen: false).updateIsAuthenticated(true);
+
                         Navigator.pushNamed(context, '/');
                       } catch (e) {
                         print('Error Happened!!!: $e');
