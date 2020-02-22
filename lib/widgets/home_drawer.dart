@@ -6,11 +6,11 @@ import 'package:flutter_firebase_firestore_crud2a/pages/register_page.dart';
 import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatelessWidget {
-  HomeDrawer({Key key, this.isAuthenticated}) : super(key: key);
-  final bool isAuthenticated;
 
   @override
   Widget build(BuildContext context) {
+    final bool isAuthenticated = Provider.of<bool>(context);
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,

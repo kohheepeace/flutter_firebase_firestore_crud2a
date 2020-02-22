@@ -35,8 +35,11 @@ class _MyAppState extends State<MyApp> {
   
   @override
   Widget build(BuildContext context) {
-    return Provider<String>(
-      create: (context) => testProviderText,
+    return MultiProvider(
+      providers: [
+        Provider<String>(create: (context) => testProviderText),
+        Provider<bool>(create: (context) => isAuthenticated)
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -45,7 +48,7 @@ class _MyAppState extends State<MyApp> {
         initialRoute: '/',
         routes: {
           // When navigating to the "/" route, build the FirstScreen widget.
-          '/': (context) => HomePage(isAuthenticated: isAuthenticated),
+          '/': (context) => HomePage(),
           '/sign_up': (context) => RegisterPage(),
         },
       ),

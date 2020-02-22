@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_firestore_crud2a/widgets/home_drawer.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.isAuthenticated}) : super(key: key);
-  final bool isAuthenticated;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -12,13 +11,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final bool isAuthenticated = Provider.of<bool>(context);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("Home Page"),
       ),
-      drawer: HomeDrawer(isAuthenticated: widget.isAuthenticated),
+      drawer: HomeDrawer(),
       body: Center(
-        child: widget.isAuthenticated ? Text('Home Page after login') : Text('Home Page before login')
+        child: isAuthenticated ? Text('Home Page after login') : Text('Home Page before login')
       ),
     );
   }
