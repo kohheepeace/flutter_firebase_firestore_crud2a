@@ -13,33 +13,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isAuthenticated = false;
   String testProviderText = "Hello Provider!";
-
-  // https://stackoverflow.com/questions/41479255/life-cycle-in-flutter
-  // https://flutterbyexample.com/stateful-widget-lifecycle/
-  void initState() {
-    super.initState();
-
-    // https://firebase.google.com/docs/auth/web/manage-users
-    // https://stackoverflow.com/questions/45353730/firebase-login-with-flutter-using-onauthstatechanged
-    FirebaseAuth.instance.onAuthStateChanged.listen((user) {
-      // This is called when "sign-in" and "sign-out" is triggerd
-      print('onAuthStateChanged called!!!');
-      
-      // If user signed-in already "user" is not null
-      setState(() {
-        isAuthenticated = user != null;
-      });
-    });
-  }
   
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         Provider<String>(create: (context) => testProviderText),
-        ChangeNotifierProvider<GlobalState>(create: (context) => GlobalState())
+        StreamProvider<FirebaseUser>(create: (context) => FirebaseAuth.instance.onAuthStateChanged)
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_firestore_crud2a/global_state.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/login_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/my_posts_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/register_page.dart';
@@ -10,7 +9,8 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isAuthenticated = Provider.of<GlobalState>(context).isAuthenticated;
+    final user = Provider.of<FirebaseUser>(context);
+    final bool isAuthenticated = user != null;
 
     return Drawer(
       child: ListView(
@@ -45,7 +45,6 @@ class HomeDrawer extends StatelessWidget {
               title: Text('Sign Out'),
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Provider.of<GlobalState>(context, listen: false).updateIsAuthenticated(false);
                 Navigator.pushNamed(context, '/');
               },
             ),
