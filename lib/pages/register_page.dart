@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +107,17 @@ class _RegisterPageState extends State<RegisterPage> {
                               email: _emailController.text,
                               password: _passwordController.text
                             )).user;
+
+                          /* store users data in firestore database */
+                          await Firestore.instance
+                            .collection("users")
+                            .document(user.uid)
+                            .setData({
+                              "name": _nameController.text,
+                              "email": _emailController.text,
+                              "createdAt": FieldValue.serverTimestamp(), // https://stackoverflow.com/questions/50907151/flutter-firestore-server-side-timestamp
+                              "updatedAt": FieldValue.serverTimestamp()
+                            });
                           
                           Navigator.pushNamed(context, '/');
                         } catch (e) {
