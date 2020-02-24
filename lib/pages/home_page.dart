@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_firestore_crud2a/models/post.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/login_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/posts_new_page.dart';
+import 'package:flutter_firebase_firestore_crud2a/pages/posts_show_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/widgets/home_drawer.dart';
 import 'package:provider/provider.dart';
 
