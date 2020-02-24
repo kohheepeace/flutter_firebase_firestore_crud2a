@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_firestore_crud2a/models/post.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/login_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/posts_new_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/widgets/home_drawer.dart';
@@ -32,12 +33,23 @@ class _HomePageState extends State<HomePage> {
             default:
               return ListView(
                 children: snapshot.data.documents.map((DocumentSnapshot document) {
+                  final post = Post.fromFirestore(document);
+                  
                   return ListTile(
                     title: Text(
-                      document['title'],
+                      post.title,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(document['content']),
+                    subtitle: Text(post.content),
+                    onTap: () {
+                      // https://flutter.dev/docs/cookbook/navigation/passing-data#4-navigate-and-pass-data-to-the-detail-screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PostsShowPage(post: post),
+                        ),
+                      );
+                    },
                   );
                 }).toList(),
               );
