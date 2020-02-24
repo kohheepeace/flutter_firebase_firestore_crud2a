@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_firestore_crud2a/pages/login_page.dart';
+import 'package:flutter_firebase_firestore_crud2a/pages/posts_new_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/widgets/home_drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +24,23 @@ class _HomePageState extends State<HomePage> {
       drawer: HomeDrawer(),
       body: Center(
         child: isAuthenticated ? Text('Home Page after login') : Text('Home Page before login')
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (isAuthenticated) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PostsNewPage()),
+            );
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+          }
+        },
+        tooltip: 'New Post',
+        child: Icon(Icons.note_add),
       ),
     );
   }
