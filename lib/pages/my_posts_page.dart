@@ -46,7 +46,12 @@ class MyPostsPage extends StatelessWidget {
                             print('click edit');
                             break;
                           case 'delete':
-                            print('click delete');
+                            await Firestore.instance
+                              .collection('users')
+                              .document(user.uid)
+                              .collection('posts')
+                              .document(post.id)
+                              .delete();
                             break;
                         }
                       },
