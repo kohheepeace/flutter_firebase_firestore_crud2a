@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_firestore_crud2a/models/post.dart';
+import 'package:flutter_firebase_firestore_crud2a/pages/posts_edit_page.dart';
 import 'package:flutter_firebase_firestore_crud2a/pages/posts_show_page.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +44,12 @@ class MyPostsPage extends StatelessWidget {
                         final post = result["value"];
                         switch (type) {
                           case 'edit':
-                            print('click edit');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PostsEditPage(post: post),
+                              ),
+                            );
                             break;
                           case 'delete':
                             await Firestore.instance
